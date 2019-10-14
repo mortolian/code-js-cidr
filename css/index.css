@@ -1,0 +1,235 @@
+/* GENERAL */
+:root {
+    --purple: #4a4750;
+    --green: #79E789;
+
+    --oct1-dark: #11ABC1;
+    --oct2-dark: #DF3062;
+    --oct3-dark: #F5B935;
+    --oct4-dark: #4BAC3F;
+
+    --oct1-light: rgba(17, 170, 193, 0.5);
+    --oct2-light: rgba(223, 48, 98, 0.5);
+    --oct3-light: rgba(245, 184, 53, 0.5);
+    --oct4-light: rgba(76, 172, 63, 0.5);
+
+    --oct1-pl: rgba(17, 170, 193, 0.5);
+    --oct2-pl: rgba(223, 48, 98, 0.5);
+    --oct3-pl: rgba(245, 184, 53, 0.5);
+    --oct4-pl: rgba(76, 172, 63, 0.5);
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    margin:0px;
+    padding:0px;
+}
+
+p {
+    font-size:1.1em;
+}
+
+/* LAYOUT GRID CONTAINER */
+.grid-container {
+    display:grid;
+    grid-template-columns:1fr 8fr 1fr;
+    grid-template-rows:auto auto auto auto;
+    grid-template-areas: 
+        "h h h"
+        ". t ."
+        ". c ."
+        ". f .";
+}
+
+.header {
+    padding:10px;
+    grid-area:h;
+    background:var(--purple);
+}
+
+.header a,
+.header a:hover {
+    color:#fff;
+    text-decoration: none;
+}
+
+.header-flex {
+    display:flex;
+    color:#fff;
+    font-size:1.2em;
+    font-family: 'Nunito', sans-serif;
+    font-weight:300;
+}
+
+.header-flex > div {
+    padding:10px;
+}
+
+.header-flex > div > b {
+    font-weight:600;
+}
+
+.header-flex > div:last-child {
+    margin-left:auto;
+    font-size:0.7em;
+}
+
+.title {
+    grid-area:t;
+}
+
+.title h1 {
+    font-family: 'Patua One', cursive;
+    font-size:4em;
+    color:var(--purple);
+}
+
+.title span.green {
+    color:var(--green);
+}
+
+.content {
+    grid-area:c;
+}
+
+.footer {
+    grid-area:f;
+
+}
+
+/* INPUT BOXES */
+input[type="text"] {
+    font-family:'Open Sans', sans-serif;
+    font-size:3em;
+    color:var(--purple);
+    padding:10px;
+    border-radius:8px;
+    text-align: center;
+    border:none;
+}
+input.octet {
+    background-color:#ccc;
+}
+input:focus {
+    outline:none;
+}
+input::placeholder {
+    color:#bdbdbd;
+}
+
+/* OCTET 1 INPUT */
+input.octet-1 {
+    background-color:var(--oct1-light);
+}
+input.octet-1:focus {
+    background-color:var(--oct1-dark);
+}
+input.octet-1::placeholder {
+    color:var(--oct1-pl);
+}
+
+/* OCTET 2 INPUT */
+input.octet-2 {
+    background-color:var(--oct2-light);
+}
+input.octet-2:focus {
+    background-color:var(--oct2-dark);
+}
+input.octet-2::placeholder {
+    color:var(--oct2-pl);
+}
+
+/* OCTET 3 INPUT */
+input.octet-3 {
+    background-color:var(--oct3-light);
+}
+input.octet-3:focus {
+    background-color:var(--oct3-dark);
+}
+input.octet-3::placeholder {
+    color:var(--oct3-pl);
+}
+
+/* OCTET 4 INPUT */
+input.octet-4 {
+    background-color:var(--oct4-light);
+}
+input.octet-4:focus {
+    background-color:var(--oct4-dark);
+}
+input.octet-4::placeholder {
+    color:var(--oct4-pl);
+}
+
+/* CIDR INPUT */
+input.cidr {
+    background-color:#ccc;
+}
+input.cidr:focus {
+    background-color:#a5a5a5;
+}
+input.cidr::placeholder {
+    color:#a5a5a5;
+}
+
+/* IP4 GRID */
+.ip4grid {
+    display:grid;
+    grid-template-columns: repeat(9, auto);
+    justify-content: center;
+    padding-bottom:30px;
+    padding-top:30px;
+}
+
+.ip4grid > div.devider {
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    flex-direction: column;
+    font-size:2em;
+    padding: 0px 10px;
+}
+
+/* RESULT GRID */
+.result-display {
+    display: grid;
+    visibility: visible;
+}
+
+.result-hide {
+    display: none;
+    visibility: hidden;
+}
+
+.result-grid {
+    display: grid;
+    grid-template-columns: 200px 150px 50px auto;
+    grid-template-rows: auto;
+    gap: 1px;
+}
+
+.result-grid > div {
+    padding:8px;
+    background-color:#F4F4F4;
+}
+
+.result-grid > div.heading {
+    font-size:1.2em;
+    font-weight:bold;
+    background-color:#EAEAEA;
+    border-bottom:4px solid #CCC;
+}
+
+.result-grid > div.span4 {
+    grid-column: span 4;
+}
+
+.result-grid > div.name {
+    font-weight: bold;
+}
+
+.result-grid > div.copyip {
+    display:inline-block;
+    text-align: center;
+    cursor: pointer;
+}
