@@ -1,11 +1,31 @@
-pages:
+stages:
+  - build
+  - deploy
+
+build:
+  stage: build
+  script: 
+    - echo "Building the app"
+
+deploy_prod:
   stage: deploy
   script:
-    - mkdir .public
-    - cp -r * .public
-    - mv .public public
-  artifacts:
-    paths:
-      - public
+    - echo "Deploy to production server"
+  environment:
+    name: production
+    url: https://test53.com
+  when: manual
   only:
-    - master
+  - master
+
+#pages:
+#  stage: deploy
+#  script:
+#    - mkdir .public
+#    - cp -r * .public
+#    - mv .public public
+#  artifacts:
+#    paths:
+#      - public
+#  only:
+#    - master
