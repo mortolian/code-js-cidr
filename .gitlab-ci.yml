@@ -1,5 +1,33 @@
 image: ubuntu:xenial
 
+before_script:
+  # Update and Upgrade Everything
+  - apt-get update -qq
+  - apt-get upgrade -y -qq
+
+  # Install required packages to deploy using RSYNC
+  - apt-get install -y -qq ssh
+  - apt-get install -y -qq rsync
+
+  # Install ssh-agent if not already installed
+  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+  
+  # Run ssh-agent
+  - eval $(ssh-agent -s)
+  
+  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+  # We're using tr to fix line endings which makes ed25519 keys work
+  # without extra base64 encoding.
+  - echo "$CI_MORTOLIO_SERVER_PRIVATE_RSA" | tr -d '\r' | ssh-add -
+  
+  # Create the SSH directory and give it the right permissions
+  - mkdir -p ~/.ssh
+  - chmod 700 ~/.ssh
+
+  ## Optionally, if you will be using any Git commands, set the user name and and email.
+  #- git config --global user.email "user@example.com"
+  #- git config --global user.name "User name"
+
 stages:
   - build
   - deploy
@@ -7,15 +35,17 @@ stages:
 build:
   stage: build
   script: 
-    - echo "Building the app"
+    - echo "Nothing to build at this time ..."
 
 deploy_prod:
+  # Production deployment
   stage: deploy
-  script:
-    - ls -lah .
-  environment:
-    name: production
-    url: https://test53.com
   when: manual
   only:
-  - master
+    - master
+  environment:
+    name: Production
+    url: https://test53.com
+  variables: ~
+  script:
+    - rsync -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR $CI_MORTOLIO_RSYNC_DESTINATION

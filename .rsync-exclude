@@ -1,0 +1,6 @@
+.git
+.gitignore
+.LICENCE.txt
+README.md
+.rsync-exclude
+.gitlab-ci.yml
