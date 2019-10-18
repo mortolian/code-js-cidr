@@ -55,7 +55,7 @@ deploy_prod:
     #- git config --global user.name "User name"
 
     # SYNC REPO data with VHOST on remote server
-    - rsync -e "ssh -o StrictHostKeyChecking=no" -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR $CI_MORTOLIO_RSYNC_DESTINATION
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
     
     # Just a indicator that everything ran
     - echo "We are done ..."
