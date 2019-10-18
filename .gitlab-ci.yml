@@ -5,29 +5,6 @@ before_script:
   - apt-get update -qq
   - apt-get upgrade -y -qq
 
-  # Install required packages to deploy using RSYNC
-  - apt-get install -y -qq ssh
-  - apt-get install -y -qq rsync
-
-  # Install ssh-agent if not already installed
-  - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
-  
-  # Run ssh-agent
-  - eval $(ssh-agent -s)
-  
-  # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
-  # We're using tr to fix line endings which makes ed25519 keys work
-  # without extra base64 encoding.
-  - echo "$CI_MORTOLIO_SERVER_PRIVATE_RSA" | tr -d '\r' | ssh-add -
-  
-  # Create the SSH directory and give it the right permissions
-  - mkdir -p ~/.ssh
-  - chmod 700 ~/.ssh
-
-  ## Optionally, if you will be using any Git commands, set the user name and and email.
-  #- git config --global user.email "user@example.com"
-  #- git config --global user.name "User name"
-
 stages:
   - build
   - deploy
@@ -48,4 +25,36 @@ deploy_prod:
     url: https://test53.com
   variables: ~
   script:
+    # Install required packages to deploy using RSYNC
+    - apt-get install -y -qq ssh
+    - apt-get install -y -qq rsync
+
+    # Install ssh-agent if not already installed
+    - 'which ssh-agent || ( apt-get update -y && apt-get install openssh-client -y )'
+    
+    # Run ssh-agent
+    - eval $(ssh-agent -s)
+    
+    # Add the SSH key stored in SSH_PRIVATE_KEY variable to the agent store
+    # We're using tr to fix line endings which makes ed25519 keys work
+    # without extra base64 encoding.
+    - echo "$CI_MORTOLIO_SERVER_PRIVATE_RSA" | tr -d '\r' | ssh-add -
+    
+    # Create the SSH directory and give it the right permissions
+    - mkdir -p ~/.ssh
+    - chmod 700 ~/.ssh
+        
+    # Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the following two lines.
+    - rm -f /home/user/.ssh/known_hosts
+    - echo "$CI_MORTOLIO_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    - chmod 644 ~/.ssh/known_hosts
+
+    ## Optionally, if you will be using any Git commands, set the user name and and email.
+    #- git config --global user.email "user@example.com"
+    #- git config --global user.name "User name"
+
+    # SYNC REPO data with VHOST on remote server
     - rsync -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR $CI_MORTOLIO_RSYNC_DESTINATION
+    
+    # Just a indicator that everything ran
+    - echo "We are done ..."
