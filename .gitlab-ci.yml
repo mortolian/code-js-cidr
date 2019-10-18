@@ -45,8 +45,8 @@ deploy_prod:
     - chmod 700 ~/.ssh
         
     # Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the following two lines.
-    - rm -f /home/user/.ssh/known_hosts
-    - echo "$CI_KNOWN_HOSTS" > ~/.ssh/known_hosts
+    # - rm -f /home/user/.ssh/known_hosts
+    # - echo "$CI_KNOWN_HOSTS" > ~/.ssh/known_hosts
     - sed -i '8d' ~/.ssh/known_hosts
     - chmod 644 ~/.ssh/known_hosts
 
@@ -55,7 +55,7 @@ deploy_prod:
     #- git config --global user.name "User name"
 
     # SYNC REPO data with VHOST on remote server
-    - rsync -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR $CI_MORTOLIO_RSYNC_DESTINATION
+    - rsync -e "ssh -o StrictHostKeyChecking=no" -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR $CI_MORTOLIO_RSYNC_DESTINATION
     
     # Just a indicator that everything ran
     - echo "We are done ..."
