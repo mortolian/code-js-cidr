@@ -47,8 +47,8 @@ deploy_prod:
     # Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the following two lines.
     # - rm -f /home/user/.ssh/known_hosts
     # - echo "$CI_KNOWN_HOSTS" > ~/.ssh/known_hosts
-    - sed -i '8d' ~/.ssh/known_hosts
-    - chmod 644 ~/.ssh/known_hosts
+    # - sed -i '8d' ~/.ssh/known_hosts
+    # - chmod 644 ~/.ssh/known_hosts
 
     ## Optionally, if you will be using any Git commands, set the user name and and email.
     #- git config --global user.email "user@example.com"
