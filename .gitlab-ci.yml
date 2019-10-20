@@ -43,8 +43,8 @@ deploy_prod:
     # Create the SSH directory and give it the right permissions
     - mkdir -p ~/.ssh
     - chmod 700 ~/.ssh
-        
-    # Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the following two lines.
+    
+    # Assuming you created the SSH_KNOWN_HOSTS variable, uncomment the following lines.
     # - rm -f /home/user/.ssh/known_hosts
     # - echo "$CI_KNOWN_HOSTS" > ~/.ssh/known_hosts
     # - sed -i '8d' ~/.ssh/known_hosts

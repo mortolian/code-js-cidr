@@ -25,6 +25,10 @@ function copyToClipboard(elm) {
     window.getSelection().removeAllRanges();
 }
 
+function formatNumber(num) {
+    return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+  }
+
 function populateInformation(elementId, info) {
     let element = document.getElementById(elementId);
     
@@ -36,7 +40,9 @@ function populateInformation(elementId, info) {
     element.innerHTML = info;
 }
 
-let octets = window.document.getElementsByClassName("cidr-input");
+
+
+let octets = window.document.querySelectorAll("#ip4 input");
 
 Array.from(octets).forEach(function(element) {
 
@@ -55,11 +61,11 @@ Array.from(octets).forEach(function(element) {
         }
 
         // Information display
-        let resultElement = document.getElementById("result");
+        let resultElement = document.getElementById("calculation");
 
         if(valid) {
             // Turn on information display
-            resultElement.classList.replace('result-hide', 'result-display');
+            resultElement.classList.replace('hide', 'display');
 
             // do the calculation if validation passed
             let ipInfo = calcIpv4AddressesFromString(octet1 + '.' + octet2 + '.' + octet3 + '.' + octet4 + '/' + cidr);     
@@ -89,11 +95,11 @@ Array.from(octets).forEach(function(element) {
             populateInformation('subnet-wildcard-ip4', ipInfo.subnet.ip4ip4SubnetWildCard.ipOctetsDecimalArray);
             populateInformation('subnet-wildcard-bin', ipInfo.subnet.ip4ip4SubnetWildCard.ipOctetsBinaryStringArray);
 
-            populateInformation('host-ips-ip4', ipInfo.subnet.ip4Hosts);
+            populateInformation('host-ips-ip4', formatNumber(ipInfo.subnet.ip4Hosts));
 
-            populateInformation('total-ips-ip4', ipInfo.subnet.ip4Addresses);
+            populateInformation('total-ips-ip4', formatNumber(ipInfo.subnet.ip4Addresses));
         } else {
-            resultElement.classList.replace('result-display', 'result-hide');
+            resultElement.classList.replace('display', 'hide');
         }
     });
 
