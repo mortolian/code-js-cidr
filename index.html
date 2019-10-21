@@ -18,24 +18,29 @@
         </nav>
     </header>
     <section id="title" class="title">
-        <h1>CIDR <span class="green">IP Calculator</span></h1>
-        <p><b>This is a CIDR calculator.</b> A CIDR calculator is a simple tool to assist you to quickly calculate the various addresses for a CIDR notation.</p>
+        <h1>CIDR <span class="green">IPv4 Calculator</span></h1>
+        <p><b>CIDR calculators</b> are simple tools to assist you to calculate a block of IP addresses.</p>
     </section>
     <section id="ip4" class="ip4">
-        <input class="octet-1" tabindex="1" type="number" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" />
+        <input class="octet-1" tabindex="1" type="text" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" />
         <span>&bull;</span>
-        <input class="octet-2" tabindex="2" type="number" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" />
+        <input class="octet-2" tabindex="2" type="text" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" />
         <span>&bull;</span>
-        <input class="octet-3" tabindex="3" type="number" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" />
+        <input class="octet-3" tabindex="3" type="text" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" />
         <span>&bull;</span>
-        <input class="octet-4" tabindex="4" type="number" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" />
+        <input class="octet-4" tabindex="4" type="text" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" />
         <span>/</span>
-        <input class="cidr" tabindex="5" type="number" name="ip4-cidr" min="1" max="32" size="2" maxlength="2" placeholder="24" />
+        <input class="cidr" tabindex="5" type="text" name="ip4-cidr" step="1" min="1" max="32" size="2" maxlength="2" placeholder="24" />
     </section>
     <section id="calculation" class="calculation hide">
         <div class="heading span4">IP Range Information</div>
 
-        <div class="name">CIDR</div>
+        <div class="name">IP</div>
+        <div class="value" id="ip-value"></div>
+        <div class="copyip mobile-hide" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide">-</div>
+
+        <div class="name">CIDR / Bitmask</div>
         <div class="value" id="cidr-value"></div>
         <div class="copyip mobile-hide">-</div>
         <div class="binary mobile-hide" id="cidr-bin"></div>
@@ -67,12 +72,12 @@
 
         <div class="heading span4">Subnet Information</div>
 
-        <div class="name">Subnet</div>
+        <div class="name">Netmask</div>
         <div class="value" id="subnet-ip4"></div>
         <div class="copyip mobile-hide" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
         <div class="binary mobile-hide" id="subnet-bin"></div>
 
-        <div class="name">Subnet Wildcard</div>
+        <div class="name">Netmask Wildcard</div>
         <div class="value" id="subnet-wildcard-ip4"></div>
         <div class="copyip mobile-hide" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
         <div class="binary mobile-hide" id="subnet-wildcard-bin"></div>

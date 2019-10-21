@@ -133,7 +133,12 @@ function calcIpv4Addresses(ip4,cidr) {
     lastIpBinary[31] = 1;
     lastIpBinary[31] = 0;
 
+    // Create a plain string of the IP Address
+    var ip4AddressString = ip4.join(".") + "/" + cidr;
+
+    // Return Result
     return {
+        ip4AddressString: ip4AddressString,
         ip4Address: calculateIpFromBinaryArray(ip4BinaryArray),
         ip4Network: calculateIpFromBinaryArray(networkIpBinary),
         ip4Broadcast: calculateIpFromBinaryArray(broadcastIpBinary),

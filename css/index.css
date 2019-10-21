@@ -29,6 +29,16 @@ p {
     font-size:1.1em;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
 /* LAYOUT GRID CONTAINER */
 body {
     display:grid;
@@ -45,7 +55,6 @@ body {
         'f f f f f f f f f f f f';
     height:100vh;
 }
-
 
 header {
     display: flex;
@@ -76,7 +85,6 @@ header a:hover {
     font-weight:300;
 }
 
-
 section.title {
     grid-area:t;
 }
@@ -91,25 +99,29 @@ section.title > h1 > span.green {
     color:var(--green);
 }
 
-
 /* IPv4 */
 section.ip4 {
     grid-area:i;
-    display:flex;
-    flex-direction: row wrap;
-    flex-grow: 1;
-    align-items:center;
+    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */ 
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
     align-content: center;
+    flex-shrink: 1;
+    flex-grow: 0;
     padding:10px 0px;
 }
-section.ip4 > input[type="number"] {
+section.ip4 > input[type="number"],
+section.ip4 > input[type="text"] {
     font-family:'Open Sans', sans-serif;
-    font-size:3em;
+    font-size:2em;
     color:var(--purple);
     padding:5px;
     border-radius:8px;
     border:none;
     text-align: center;
+    flex-basis: 0px;
+    padding:20px 10px
 }
 section.ip4 > span {
     font-size: 1.5em;
@@ -149,8 +161,6 @@ section.calculation .copyip {
     cursor: pointer;
 }
 
-
-
 footer {
     grid-area:f;
     background:#EAEAEA;
@@ -158,14 +168,14 @@ footer {
     text-align: center;
 }
 
-
 /* MEDIUM SCREENS */
 @media all and (max-width: 800px) {
-    section.ip4 > input[type="number"] {
+    section.ip4 > input[type="number"],
+    section.ip4 > input[type="text"] {
         font-size:1.5em;
-        padding:20px 10px;
     }
 }
+
 /* SMALL SCREENS */
 @media all and (max-width: 500px) {
     body {
@@ -177,6 +187,7 @@ footer {
         align-items: center;
         text-align: center;
     }
+
     section.title > h1 {
         font-size:2em;
     }
@@ -190,21 +201,22 @@ footer {
     }
 
     section.ip4 {
-        flex-direction: column;
+        flex-direction: row;
         flex-grow: 1;
         align-items:center;
         align-content: center;
         padding:10px 0px;
     }
-    section.ip4 > input[type="number"] {
+    section.ip4 > input[type="number"],
+    section.ip4 > input[type="text"] {
         width:100%;
-        font-size:1.5em;
+        font-size:1.1em;
+        padding:10px 5px;
     }
     section.ip4 > span {
         display:none;
         visibility: hidden;
     }
-
     section.calculation {
         grid-template-columns: minmax(min-content,max-content) auto;
     }
@@ -267,46 +279,4 @@ input.cidr:focus {
 }
 input.cidr::placeholder {
     color:#a5a5a5;
-}
-
-
-/* RESULT GRID */
-.result-display {
-    display: grid;
-    visibility: visible;
-}
-
-.result-hide {
-    display: none;
-    visibility: hidden;
-}
-
-.result-grid {
-    display: grid;
-    grid-template-columns: 200px 150px 50px auto;
-    grid-template-rows: auto;
-    gap: 1px;
-}
-
-.result-grid > div {
-    padding:8px;
-    background-color:#F4F4F4;
-}
-
-.result-grid > div.heading {
-
-}
-
-.result-grid > div.span4 {
-    grid-column: span 4;
-}
-
-.result-grid > div.name {
-    font-weight: bold;
-}
-
-.result-grid > div.copyip {
-    display:inline-block;
-    text-align: center;
-    cursor: pointer;
 }
