@@ -102,25 +102,21 @@ section.title > h1 > span.green {
 /* IPv4 */
 section.ip4 {
     grid-area:i;
-    display: -moz-box;         /* OLD - Firefox 19- (buggy but mostly works) */ 
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     align-content: center;
-    flex-shrink: 1;
-    flex-grow: 0;
     padding:10px 0px;
 }
 section.ip4 > input[type="number"],
 section.ip4 > input[type="text"] {
-    font-family:'Open Sans', sans-serif;
+    font-family: 'Patua One', cursive;
     font-size:2em;
     color:var(--purple);
     padding:5px;
     border-radius:8px;
     border:none;
     text-align: center;
-    flex-basis: 0px;
     padding:20px 10px
 }
 section.ip4 > span {
