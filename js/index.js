@@ -196,12 +196,15 @@ function keyStrokes(event) {
     }
 
     // Test OCTET value
+    // you need to find a better regular expression here.
     if(this.className.includes("octet")) {
-        const testPatterm = /[0-9]{1,2}/;
-        const testZeros = /^0/;        
-        let newValue = Number(this.value + event.key);
+        let testPattern = /[0-9]{1,2}/;
+        let testZeros = /(^0[1-9]$)|(^00$)/;
+        let testAlpha = /^[0-9]*$/
+        
+        let newValue = this.value + event.key;
 
-        if(testZeros.test(newValue) || !testPatterm.test(newValue) || (newValue < 0 || newValue > 255)) {
+        if(testZeros.test(newValue) || !testAlpha.test(newValue) || (Number(newValue) < 0 || Number(newValue) > 255)) {
             event.preventDefault();
         }
         return;
@@ -209,8 +212,8 @@ function keyStrokes(event) {
     
     // Test CIDR value
     if(this.className.includes("cidr")) {
-        const testPatterm = /[0-9]{1,2}/;        
-        const testZeros = /^0/;
+        let testPatterm = /[0-9]{1,2}/;        
+        let testZeros = /^0/;
     
         let newValue = Number(this.value + event.key);
 
