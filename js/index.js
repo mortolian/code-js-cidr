@@ -35,6 +35,17 @@ function previousTab(element, event) {
     }
 }
 
+/**
+ * This will execute the animation for copying items on the page.
+ * 
+ * @param {*} elm 
+ */
+function animateCopyToClipBoard(elm) {
+    elm.classList.add("animated", "rubberBand");
+    elm.addEventListener('animationend', function(event) {
+        elm.classList.remove("animated", "rubberBand");
+    });
+}
 
 /**
  * This will copy the text contained in an elements innerHTML
@@ -42,6 +53,8 @@ function previousTab(element, event) {
  * @param {object} elm Element object
  */
 function copyToClipboard(elm) {
+    animateCopyToClipBoard(elm);
+
     var range = document.createRange();
     range.selectNode(elm);
     window.getSelection().removeAllRanges();

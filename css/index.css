@@ -118,7 +118,8 @@ section.ip4 > input[type="text"] {
     border-radius:8px;
     border:none;
     text-align: center;
-    padding:20px 10px
+    padding:20px 10px;
+    outline: none;
 }
 section.ip4 > span {
     font-size: 1.5em;
@@ -156,6 +157,9 @@ section.calculation > div.heading {
 }
 section.calculation .copyip {
     cursor: pointer;
+}
+section.calculation .binary {
+    word-break: break-all;
 }
 
 section.description {
