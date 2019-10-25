@@ -17,7 +17,6 @@ build:
 deploy_prod:
   # Production deployment
   stage: deploy
-  when: manual
   only:
     - master
   environment:
