@@ -223,7 +223,7 @@ footer {
         visibility: hidden;
     }
     section.calculation {
-        grid-template-columns: minmax(min-content,max-content) auto;
+        grid-template-columns: minmax(min-content,max-content) auto minmax(min-content, max-content);
     }
     section.calculation .mobile-hide {
         display:none;
