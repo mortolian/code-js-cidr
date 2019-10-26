@@ -232,6 +232,36 @@ footer {
     }
 }
 
+/* CALCULATION COLORS */
+section.calculation span.blue {
+    background:var(--oct1-light);
+}
+section.calculation span.red {
+    background:var(--oct2-light);
+}
+section.calculation span.yellow {
+    background:var(--oct3-light);
+}
+section.calculation span.green {
+    background:var(--oct4-light);
+}
+section.calculation span.grey {
+    background:#a5a5a5;
+}
+section.calculation span.blue, 
+section.calculation span.red, 
+section.calculation span.yellow,
+section.calculation span.green,
+section.calculation span.grey   {
+    padding:1px 10px;
+    margin:1px;
+    border-radius:3px;
+}
+section.calculation #cidr-bin > span {
+    padding:1px 3px;
+}
+
+
 /* OCTET 1 INPUT */
 input.octet-1 {
     background-color:var(--oct1-light);

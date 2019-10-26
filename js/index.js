@@ -83,12 +83,54 @@ function formatNumber(num) {
  */
 function populateInformation(elementId, info) {
     let element = document.getElementById(elementId);
-    
+    let colorClassArray = ["blue", "red", "yellow", "green"];
+    let defaultColorClass = "grey";
+  
+    // First, normalise any arrays to strings, because ultimately even if
+    // the content is not recognised, we can always output the string.
     if(info instanceof Array) {
         info = info.join('.');
-        infoHTML = '';
     }
-
+  
+    // Colour a base 10 or 2 octet
+    const checkOctetBinary = /(^[0-1]{8}.[0-1]{8}.[0-1]{8}.[0-1]{8}$)|(^[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}.[0-9]{1,3}$)/;
+    if(checkOctetBinary.test(info)) {
+      let infoArray = info.split(".");
+      
+      infoArray.forEach(function(octet,index,infoArray) {
+         infoArray[index] = '<span class="' + colorClassArray[index] + '">' + octet + '</span>';
+      });
+      info = infoArray.join('.');
+    }
+    
+    // check to see if CIDR binary, and then style
+    const checkCIDRBinary = /^[0-1.]{63}$/;
+    if(checkCIDRBinary.test(info)) {
+        let infoArray = info.split(".");
+        
+        infoArray.forEach(function(bit,index,infoArray) {
+          // calculate which octet the bit belongs to
+          let octetNum = Math.floor(index / 8);
+          let color = defaultColorClass; 
+          let count = 1;
+          
+          if(bit == '1') {
+             color = colorClassArray[octetNum];
+          }
+          
+          // decorate
+          infoArray[index] = '<span class="' + color + '">' + bit + '</span>';
+        });
+      
+        for (let i = 1; i < 4; i++) {
+          let index = ((i * 8) + i)-1;
+          infoArray.splice(index, 0, '.');  
+        }
+       
+        info = infoArray.join('');
+    }
+  
+    // insert info on the page in the element ID specified
     element.innerHTML = info;
 }
 
@@ -100,9 +142,6 @@ function populateInformation(elementId, info) {
  * @param {object} event The event object
  */
 function doCalculation(event) {
-
-    console.log(event);
-
     // grab all the information and generate the required calculation string
     let octet1 = document.querySelector('input[name="ip4-octet-1"]').value;
     let octet2 = document.querySelector('input[name="ip4-octet-2"]').value;
