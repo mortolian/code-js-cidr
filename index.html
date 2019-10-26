@@ -10,29 +10,42 @@
     <link href="css/index.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="vendor/animate-js/animate.css" media="screen">
     <link href="css/index.css" rel="stylesheet" media="print">
-    <title>CIDR Calculator by Mortolian</title>
+    <title>CIDR Calculator by Mortolian - Classless Inter-Domain Routing</title>
+
+    <!--SEO-->
+    <meta name="description" content="CIDR (Classless Inter-Domain Routing) calculators are simple tools to assist you to calculate a block of IP addresses.">
+    <meta name="keywords" content="Amazon,AWS,CIDR,Classless,Inter-Domain,Routing,calculators,simple,tool,calculate,IP">
+    <meta name="author" content="Gideon,Mortolian">
+    <meta rel="canonical" content="https://test53.com">
+
+    <!--OPEN GRAPH-->
+    <meta property="og:title" content="CIDR Calculator by Mortolian">
+    <meta property="description" content="CIDR (Classless Inter-Domain Routing) calculators are simple tools to assist you to calculate a block of IP addresses.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://test53.com">
+    <meta property="og:image" content="https://test53.com/images/cidr.jpg">
 </head>
 <body>
     <header>
         <h1><b>TESt53.com</b>&nbsp;|&nbsp;by Mortolian</h1>
         <nav>
-          <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" target="_blank" title="Classless Inter-Domain Routing"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp; Wikipedia</a>
+          <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp; Wikipedia</a>
         </nav>
     </header>
     <section id="title" class="title">
         <h1 class="animated bounceInRight">IPv4 <span class="green">CIDR Calculator</span></h1>
         <p><b>CIDR (Classless Inter-Domain Routing) calculators</b> are simple tools to assist you to calculate a block of IP addresses.</p>
     </section>
-    <section id="ip4" class="ip4">
-        <input class="octet octet-1" tabindex="1" type="text" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" />
+    <section id="ip4" class="ip4" title="Enter your IP and CIDR notation for a IP4 address block calculation.">
+        <input class="octet octet-1" tabindex="1" type="text" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" title="IP4 octet one input box" />
         <span>&bull;</span>
-        <input class="octet octet-2" tabindex="2" type="text" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" />
+        <input class="octet octet-2" tabindex="2" type="text" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" title="IP4 octet two input box" />
         <span>&bull;</span>
-        <input class="octet octet-3" tabindex="3" type="text" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" />
+        <input class="octet octet-3" tabindex="3" type="text" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" title="IP4 octet three input box" />
         <span>&bull;</span>
-        <input class="octet octet-4" tabindex="4" type="text" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" />
+        <input class="octet octet-4" tabindex="4" type="text" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" title="IP4 octet four input box" />
         <span>/</span>
-        <input class="cidr" tabindex="5" type="text" name="ip4-cidr" step="1" min="1" max="32" size="2" maxlength="2" placeholder="24" />
+        <input class="cidr" tabindex="5" type="text" name="ip4-cidr" step="1" min="1" max="32" size="2" maxlength="2" placeholder="24" title="IP4 CIDR input box" />
     </section>
     <section id="calculation" class="calculation hide">
         <div class="heading span4">IP Range Information</div>
@@ -97,16 +110,18 @@
 
     <section id="description" class="description myPagesClass">
         <hr>
+        <h2>What is CIDR notation according to Wikipedia</h2>
         <p>
             CIDR notation is a compact representation of an IP address and its associated routing prefix. The notation is constructed from an IP address, a slash ('/') character, and a decimal number. The number is the count of leading 1 bits in the subnet mask. Larger values here indicate smaller networks. The maximum size of the network is given by the number of addresses that are possible with the remaining, least-significant bits below the prefix.
         </p>
         <p>
             The IP address is expressed according to the standards of IPv4 or IPv6. The address may denote a single, distinct interface address or the beginning address of an entire network. The aggregation of these bits is often called the host identifier.
         </p>
+        <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp;Read more on Wikipedia</a>
     </section>
 
     <footer>
-        <p>IPv4 CIDR Calculator | Copyright &copy; 2019 - <a href="https://gideon.mortolio.com" title="Mortolian" target="_blank">Mortolian</p>
+        <p>IPv4 CIDR Calculator | Copyright &copy; 2019 - <a href="https://gideon.mortolio.com" title="Mortolian" target="_blank">Mortolian</a></p>
     </footer>
 </body>
 
@@ -118,7 +133,6 @@
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-
   gtag('config', 'UA-33991174-5');
 </script>
 </html>
