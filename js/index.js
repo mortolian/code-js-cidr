@@ -333,7 +333,7 @@ function addBookmark(event) {
         return;
     }
 
-    if(localStorage.getItem('ipBookmarkArray').length > 0) {
+    if(localStorage.getItem('ipBookmarkArray') !== null) {
         ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
     }
 
@@ -373,7 +373,7 @@ function removeBookmark(elm) {
         return;
     }
 
-    if(localStorage.getItem('ipBookmarkArray').length > 0) {
+    if(localStorage.getItem('ipBookmarkArray') !== null) {
         ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
     }
 
@@ -422,7 +422,7 @@ function updateBookMarkedList() {
     let bookmarksSectionElement = document.getElementById('bookmarks');
 
     // get the data
-    if(localStorage.getItem('ipBookmarkArray').length > 5) {
+    if(localStorage.getItem('ipBookmarkArray') !== null) {
         ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
         // display the bookmarks element
         bookmarksSectionElement.classList.remove('hide');
@@ -476,7 +476,7 @@ function updateBookMarkedList() {
         element.addEventListener('keyup', doCalculation);        
     });
 
-    // Event listener to add a new bookmark
+    // Event listener to add a new bookmark 
     let bookmarkElement = document.getElementById('bookmark');
     bookmarkElement.addEventListener('click', addBookmark);
     
