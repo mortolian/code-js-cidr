@@ -9,6 +9,7 @@
     <link href="vendor/fontawesome-5-11-2/css/all.css" rel="stylesheet">
     <link href="css/index.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="vendor/animate-js/animate.css" media="screen">
+    <link rel="stylesheet" href="vendor/balloon/balloon.min.css" media="screen">
     <link href="css/index.css" rel="stylesheet" media="print">
     <title>CIDR Calculator by Mortolian - Classless Inter-Domain Routing</title>
 
@@ -38,22 +39,31 @@
         <h1 class="animated bounceInRight">IPv4 <span class="green">CIDR Calculator</span></h1>
         <p>
             <b>CIDR (Classless Inter-Domain Routing) calculators</b> are simple tools to assist you to calculate a block of IP addresses. 
-            <a href="https://tools.ietf.org/html/rfc4632" target="_blank" title="Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan">RFC 4632</a>
-            ,&nbsp;
-            <a href="https://tools.ietf.org/html/rfc791" target="_blank" rel="noopener noreferrer" title="A document specifies the DoD Standard Internet Protocol. The Internet Protocol is designed for use in interconnected systems of packet-switched computer communication networks.">RFC 791</a>
+            <a href="https://tools.ietf.org/html/rfc4632" target="_blank" title="Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan">RFC-4632</a>,
+            &nbsp;
+            <a href="https://tools.ietf.org/html/rfc791" target="_blank" rel="noopener noreferrer" title="A document specifies the DoD Standard Internet Protocol. The Internet Protocol is designed for use in interconnected systems of packet-switched computer communication networks.">RFC-791</a>
+            .
         </p>
     </section>
-    <section id="ip4" class="ip4" title="Enter your IP and CIDR notation for a IP4 address block calculation.">
+    <section id="ip4" class="ip4">
         <input class="octet octet-1" tabindex="1" type="text" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" title="IP4 octet one input box" />
-        <span>&bull;</span>
+        <span class="mobile-hide">&bull;</span>
         <input class="octet octet-2" tabindex="2" type="text" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" title="IP4 octet two input box" />
-        <span>&bull;</span>
+        <span class="mobile-hide">&bull;</span>
         <input class="octet octet-3" tabindex="3" type="text" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" title="IP4 octet three input box" />
-        <span>&bull;</span>
+        <span class="mobile-hide">&bull;</span>
         <input class="octet octet-4" tabindex="4" type="text" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" title="IP4 octet four input box" />
-        <span>/</span>
+        <span class="mobile-hide">/</span>
         <input class="cidr" tabindex="5" type="text" name="ip4-cidr" step="1" min="1" max="32" size="2" maxlength="2" placeholder="24" title="IP4 CIDR input box" />
+        <span id="bookmark" class="bookmark" data-balloon-pos="up" aria-label="Button to bookmark this IP"><i class="fas fa-bookmark"></i></span>
+        <span id="print" class="print mobile-hide" data-balloon-pos="up" aria-label="Button to print the CIDR information"><i class="fas fa-print"></i></span>
     </section>
+
+    <section id="bookmarks" class="bookmarks hide">
+        <h1>Bookmarked&nbsp;&nbsp;<i class="fas fa-question-circle" data-balloon-pos="up" data-balloon-length="medium" aria-label="You can bookmark the IPS you have entered and click on them to quickly recall their calculation."></i></h1>
+        <ul id="bookmarked_ips" class="bookmarked_ips"></ul>
+    </section>
+
     <section id="calculation" class="calculation hide">
         <div class="heading span4">IP Range Information</div>
 

@@ -2,6 +2,7 @@
 :root {
     --purple: #4a4750;
     --green: #79E789;
+    --link: #075b84;
 
     --oct1-dark: #11ABC1;
     --oct2-dark: #DF3062;
@@ -29,6 +30,11 @@ p {
     font-size:1.1em;
 }
 
+a {
+    text-decoration: none;
+    color:var(--link);
+}
+
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -44,13 +50,14 @@ body {
     display:grid;
     grid-template-columns: repeat(12,1fr);
     grid-template-rows:
-        repeat(3,minmax(min-content, max-content))
+        repeat(4,minmax(min-content, max-content))
         auto      
         repeat(2, minmax(min-content,max-content));
     grid-template-areas: 
         'h h h h h h h h h h h h'
         '. t t t t t t t t t t .'
         '. i i i i i i i i i i .'
+        '. b b b b b b b b b b .'
         '. c c c c c c c c c c .'
         '. d d d d d d d d d d .'
         'f f f f f f f f f f f f';
@@ -125,6 +132,61 @@ section.ip4 > span {
     font-size: 1.5em;
     color:#CCC;
     padding:10px;
+}
+section.ip4 > span.bookmark {
+    cursor: pointer;
+}
+section.ip4 > span.bookmark:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+section.ip4 > span.print {
+    cursor: pointer;
+}
+section.ip4 > span.print:hover {
+    cursor: pointer;
+    color: var(--green);
+}
+
+/* BOOKMARK SECTION */
+section.bookmarks {
+    grid-area: b;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+}
+section.bookmarks.hide {
+    visibility:hidden;
+    display:none;
+}
+section.bookmarks > *,
+section.bookmarks > ul > li {
+    padding:5px 10px;
+    margin:1px;
+    font-size: 1em;
+}
+section.bookmarks > h1 {
+    font-weight: 600;    
+}
+section.bookmarks > ul > li {
+    background:#EAEAEA;
+    border-radius: 3px;
+    display:inline-block;
+    cursor: pointer;  
+    list-style: none;
+}
+section.bookmarks > ul > li:hover {
+    background:#cecece;
+}
+section.bookmarks > ul > li > i {
+    padding-left:10px;
+    color:#aeaeae;
+}
+section.bookmarks > ul > li > i:hover {
+    padding-left:10px;
+    color:red;
 }
 
 /* CALCULATION RESULT GRID */
@@ -219,7 +281,7 @@ footer {
         font-size:1.1em;
         padding:10px 5px;
     }
-    section.ip4 > span {
+    section.ip4 > span.mobile-hide {
         display:none;
         visibility: hidden;
     }

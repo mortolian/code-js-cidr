@@ -3,7 +3,6 @@ This JS file contains all the code which help with the functioning
 of the CIDR page.
 */
 
-
 /**
  * This will pass the cursor to the next input element
  * 
@@ -18,7 +17,6 @@ function nextTab(element, event) {
         toTab.focus();
     }
 }
-
 
 /**
  * This will pass the cursor to the previos input element
@@ -48,6 +46,25 @@ function animateCopyToClipBoard(elm) {
 }
 
 /**
+ * This will execute an animation.
+ * 
+ * @param {*} elm 
+ */
+function animateIpBookmark(elm) {
+    elm.classList.add("animated", "swing");
+    elm.addEventListener('animationend', function(event) {
+        elm.classList.remove("animated", "swing");
+    });
+}
+
+/**
+ * This will handle printing
+ */
+function printPage(event) {
+    window.print();
+}
+
+/**
  * This will copy the text contained in an elements innerHTML
  * 
  * @param {object} elm Element object
@@ -63,7 +80,6 @@ function copyToClipboard(elm) {
     window.getSelection().removeAllRanges();
 }
 
-
 /**
  * This will format a number for display
  * 
@@ -72,7 +88,6 @@ function copyToClipboard(elm) {
 function formatNumber(num) {
     return num.toString().replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
 }
-
 
 /**
  * This is a helper function that will pupulate the information for an
@@ -134,14 +149,10 @@ function populateInformation(elementId, info) {
     element.innerHTML = info;
 }
 
-
 /**
- * This will execute the calculation required when the IP is completely
- * filled in and valid. It will also populate the result to the page.
- * 
- * @param {object} event The event object
+ * This will grab the IP data from the input boxes.
  */
-function doCalculation(event) {
+function grabIPInput() {
     // grab all the information and generate the required calculation string
     let octet1 = document.querySelector('input[name="ip4-octet-1"]').value;
     let octet2 = document.querySelector('input[name="ip4-octet-2"]').value;
@@ -152,18 +163,56 @@ function doCalculation(event) {
     // validate all the values
     let valid = false;
     if(octet1 && octet2 && octet3 && octet4 && cidr) {
-        valid = true;
+        return String(octet1 + '.' + octet2 + '.' + octet3 + '.' + octet4 + '/' + cidr);
     }
 
+    return false;
+}
+
+/**
+ * This will populate the IP address selection with the given IP
+ * data.
+ * 
+ * @param {*} oct1 
+ * @param {*} oct2 
+ * @param {*} oct3 
+ * @param {*} oct4 
+ * @param {*} cidr 
+ */
+function setInputValues(oct1, oct2, oct3, oct4, cidr) {
+    // grab all the information and generate the required calculation string
+    let octet1 = document.querySelector('input[name="ip4-octet-1"]');
+    let octet2 = document.querySelector('input[name="ip4-octet-2"]');
+    let octet3 = document.querySelector('input[name="ip4-octet-3"]');
+    let octet4 = document.querySelector('input[name="ip4-octet-4"]');
+    let cidrInput = document.querySelector('input[name="ip4-cidr"]');
+  
+    octet1.value = oct1;
+    octet2.value = oct2;
+    octet3.value = oct3;
+    octet4.value = oct4;
+    cidrInput.value = cidr;
+
+}
+
+/**
+ * This will execute the calculation required when the IP is completely
+ * filled in and valid. It will also populate the result to the page.
+ * 
+ * @param {object} event The event object
+ */
+function doCalculation(event) {
+    let ipString = grabIPInput();
+    
     // Information display
     let resultElement = document.getElementById("calculation");
 
-    if(valid) {
+    if(ipString) {    
         // Turn on information display
         resultElement.classList.replace('hide', 'display');
 
         // do the calculation if validation passed
-        let ipInfo = calcIpv4AddressesFromString(octet1 + '.' + octet2 + '.' + octet3 + '.' + octet4 + '/' + cidr);     
+        let ipInfo = calcIpv4AddressesFromString(ipString);     
 
         // draw all the values if validation passed
         populateInformation('ip-value', ipInfo.ip4AddressString);
@@ -198,7 +247,6 @@ function doCalculation(event) {
         resultElement.classList.replace('display', 'hide');
     }
 }
-
 
 /**
  * This will check what do do with a keystroke on an input
@@ -276,17 +324,166 @@ function keyStrokes(event) {
     }
 }
 
-// select all the input items
-let octets = window.document.querySelectorAll("#ip4 input");
+// This will manage all the bookmarking functionality
+function addBookmark(event) {
+    let ipString = grabIPInput();
+    let ipBookmarkArray = [];
 
-// itteratively add event listeners to the selected input items
-Array.from(octets).forEach(function(element) {
-    // add a keydown eventlistener to manage keystrokes for the input boxes
-    element.addEventListener('keydown', keyStrokes); 
+    if(!ipString || ipString === "") {
+        return;
+    }
 
-    // add a INPUT event listener to execute the calculation
-    element.addEventListener('input', doCalculation);
+    if(localStorage.getItem('ipBookmarkArray').length > 0) {
+        ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
+    }
+
+    // Remove any empty items
+    ipBookmarkArray.forEach(function(item, index) {
+        if(item == "") {
+            ipBookmarkArray.splice(index, 1);
+        }
+    });
+
+    // Avoid duplicates
+    if(ipBookmarkArray.includes(ipString)) {
+        return;
+    }
+
+    // Add new data to array
+    ipBookmarkArray.push(ipString);
+
+    // Store data
+    localStorage.setItem('ipBookmarkArray', JSON.stringify(ipBookmarkArray));
+
+    // update bookmarks list
+    updateBookMarkedList();
+}
+
+/**
+ * This will remove a bookmark from the bookmarks data
+ * and refresh the list on screen
+ * 
+ * @param {*} elm 
+ */
+function removeBookmark(elm) {
+    let ipString = elm.parentElement.getAttribute('ip');
+    let ipBookmarkArray = [];
+
+    if(!ipString || ipString === "") {
+        return;
+    }
+
+    if(localStorage.getItem('ipBookmarkArray').length > 0) {
+        ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
+    }
+
+    // Remove any empty items and the specified IP string
+    ipBookmarkArray.forEach(function(item, index) {
+        if(item == "" || item == ipString) {
+            ipBookmarkArray.splice(index, 1);
+        }
+    });
+
+    // Store data
+    localStorage.setItem('ipBookmarkArray', JSON.stringify(ipBookmarkArray));
+
+    // update bookmarks list
+    updateBookMarkedList();
+}
+
+/**
+ * This will insert a new bookmark in the list and refresh the
+ * on screen list.
+ * 
+ * @param {*} elm 
+ */
+function insertBookmark(elm) {
+    let ipString = elm.parentElement.getAttribute('ip');
+    let ipInfo = calcIpv4AddressesFromString(ipString);
+
+    animateIpBookmark(elm.parentElement);
+
+    setInputValues(
+        ipInfo.ip4Address.ipOctetsDecimalArray[0], 
+        ipInfo.ip4Address.ipOctetsDecimalArray[1],
+        ipInfo.ip4Address.ipOctetsDecimalArray[2],
+        ipInfo.ip4Address.ipOctetsDecimalArray[3],
+        ipInfo.subnet.ip4CIDR
+    );
+
+    doCalculation();
+}
+
+/**
+ * This will update the bookmark list on screen
+ */
+function updateBookMarkedList() {
+    let bookmarksElement = document.getElementById('bookmarked_ips');
+    let bookmarksSectionElement = document.getElementById('bookmarks');
+
+    // get the data
+    if(localStorage.getItem('ipBookmarkArray').length > 5) {
+        ipBookmarkArray = JSON.parse(localStorage.getItem('ipBookmarkArray'));
+        // display the bookmarks element
+        bookmarksSectionElement.classList.remove('hide');
+    } else {
+        // hide the bookmarks element
+        bookmarksSectionElement.classList.add('hide');
+        return;
+    }
+
+    // wipe the present bookmarks
+    bookmarksElement.innerHTML = "";
     
-    // add a keyup event listener to execute the calculation
-    element.addEventListener('keyup', doCalculation);        
-});
+    let bookmarksFragment = new DocumentFragment();
+    
+    ipBookmarkArray.forEach(function(item,index) {
+        // create elements
+        let li = document.createElement("li");
+        let i = document.createElement("i");
+        let span = document.createElement("span");
+        i.classList.add('far','fa-trash-alt');
+        i.setAttribute('onclick', 'removeBookmark(this)')
+        i.setAttribute('title', 'Remove from bookmarks');
+        span.textContent = item;
+        span.setAttribute('onclick', 'insertBookmark(this)');
+        li.setAttribute('ip', item);
+        li.appendChild(span);
+        li.appendChild(i);
+        bookmarksFragment.appendChild(li);
+    });
+
+    bookmarksElement.appendChild(bookmarksFragment);
+}
+
+/**
+ * This will load when the document is readdy
+ * IFFY
+ */
+(function() {
+    // select all the input items
+    let octets = window.document.querySelectorAll("#ip4 input");
+
+    // itteratively add event listeners to the selected input items
+    Array.from(octets).forEach(function(element) {
+        // add a keydown eventlistener to manage keystrokes for the input boxes
+        element.addEventListener('keydown', keyStrokes); 
+
+        // add a INPUT event listener to execute the calculation
+        element.addEventListener('input', doCalculation);
+        
+        // add a keyup event listener to execute the calculation
+        element.addEventListener('keyup', doCalculation);        
+    });
+
+    // Event listener to add a new bookmark
+    let bookmarkElement = document.getElementById('bookmark');
+    bookmarkElement.addEventListener('click', addBookmark);
+    
+    // refresh bookmarks list on initial load
+    updateBookMarkedList(); 
+
+    // setup printer event listener
+    let printButtonElement = document.getElementById('print');
+    printButtonElement.addEventListener('click', printPage);
+})();
