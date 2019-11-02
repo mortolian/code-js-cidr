@@ -56,9 +56,9 @@ deploy_prod:
     # Test the SSH connection
     - ssh -q -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=no $CI_PROJECT_HOST exit
 
-    # Set permissions
-    - find storage -type f -exec chmod 755 {}
-    - find storage -type d -exec chmod 755 {}
+    # Set permissions (remember the archive option in RSYNC to keep the permission meta data)
+    - find . -type f -exec chmod 755 {} \;
+    - find . -type d -exec chmod 755 {} \;
 
     # SYNC REPO data with VHOST on remote server
     - rsync -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
