@@ -53,8 +53,18 @@ deploy_prod:
     #- git config --global user.email "user@example.com"
     #- git config --global user.name "User name"
 
+    # Test the SSH connection
+    - ssh -q -o BatchMode=yes -o ConnectTimeout=10 -o StrictHostKeyChecking=no $CI_PROJECT_HOST exit
+
+    # Set permissions
+    - find storage -type f -exec chmod 755 {}
+    - find storage -type d -exec chmod 755 {}
+
     # SYNC REPO data with VHOST on remote server
-    - rsync -e "ssh -o StrictHostKeyChecking=no" -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
-    
+    - rsync -avr --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
+
+    # Run remote.sh script. Remember to exlcude these files from the rsync .rsync-exclude
+    # - ssh $CI_PROJECT_HOST 'bash -s' < ./.remote.sh
+
     # Just a indicator that everything ran
     - echo "We are done ..."
