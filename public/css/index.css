@@ -93,6 +93,10 @@ header a:hover {
     font-weight:300;
 }
 
+header > h1 > img.header-logo {
+    height:60px;
+}
+
 section.title {
     grid-area:t;
 }

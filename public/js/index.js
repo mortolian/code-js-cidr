@@ -4,6 +4,18 @@ of the CIDR page.
 */
 
 /**
+ * 
+ * @param {
+ * } element 
+ * @param {*} event 
+ */
+function updateCopyrightYear() {
+  const today = new Date()
+  const year = today.getFullYear()
+  return year;
+}
+
+/**
  * This will pass the cursor to the next input element
  * 
  * @param {object} element Element object 
@@ -486,4 +498,8 @@ function updateBookMarkedList() {
     // setup printer event listener
     let printButtonElement = document.getElementById('print');
     printButtonElement.addEventListener('click', printPage);
+
+    // update the copyright year
+    const copyyear = window.document.getElementById('copyrightyear');
+    copyyear.innerHTML = this.updateCopyrightYear();
 })();
