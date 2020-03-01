@@ -61,7 +61,7 @@ deploy_prod:
     - find . -type d -exec chmod 755 {} \;
 
     # SYNC REPO data with VHOST on remote server
-    - rsync -avrd --omit-dir-times --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
+    - rsync -ard --omit-dir-times --exclude-from '.rsync-exclude' $CI_PROJECT_DIR/ $CI_MORTOLIO_RSYNC_DESTINATION
 
     # Run remote.sh script. Remember to exlcude these files from the rsync .rsync-exclude
     # - ssh $CI_PROJECT_HOST 'bash -s' < ./.remote.sh
