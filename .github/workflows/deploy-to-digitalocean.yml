@@ -1,0 +1,45 @@
+name: deploy-to-digitalocean
+on:
+    push:
+        branches: 'master'
+
+jobs:
+    deploy-digitalocean:
+        runs-on: ubuntu-latest
+        env: 
+            SSH_USER: 'gideon'
+            SSH_HOST: 'do1.mortolio.com'
+            REMOTE_DEST: '/var/www/test53.com/public/'
+
+        steps:
+            - uses: actions/checkout@v1
+
+            -   name: Setup SSH Keys and known_hosts
+                env:
+                    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+                run: |
+                    mkdir -p ~/.ssh
+                    echo -e "Host *\n\tStrictHostKeyChecking no\n\n" > ~/.ssh/config
+                    ssh-keyscan github.com >> ~/.ssh/known_hosts
+                    ssh-agent -a $SSH_AUTH_SOCK > /dev/null
+                    ssh-add - <<< "${{ secrets.SSH_PRIVATE_KEY }}"
+
+            -   name: Do Rollout
+                env:
+                    SSH_AUTH_SOCK: /tmp/ssh_agent.sock
+                run: |         
+                    # just show some details about the folder you are working with
+                    ls -la .
+                    
+                    # Set permissions (remember the archive option in RSYNC to keep the permission meta data)
+                    find . -type f -exec chmod 755 {} \;
+                    find . -type d -exec chmod 755 {} \;
+                    
+                    # sync the files to the remote server
+                    rsync -avrd --omit-dir-times --exclude-from '.rsync-exclude' ./public/ $SSH_USER@$SSH_HOST:$REMOTE_DEST
+                    
+                    # show the result
+                    ssh -o StrictHostKeyChecking=no $SSH_USER@$SSH_HOST 'ls -la $REMOTE_DEST'
+
+                    # Just a indicator that everything ran
+                    echo "We are done ..."
