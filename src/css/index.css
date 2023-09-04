@@ -74,8 +74,8 @@ header {
     background:var(--purple);
 }
 header > h1 {
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
     font-size:1.2em;
     font-weight: 100;
 }
@@ -103,8 +103,8 @@ section.title {
 section.title > h1 {
     font-family: 'Patua One', cursive;
     font-size:4em;
-    margin:0px;
-    padding:40px 0px 0px 0px;
+    margin:0;
+    padding:40px 0 0 0;
     color:var(--purple);
 }
 section.title > h1 > span.green {
@@ -118,14 +118,13 @@ section.ip4 {
     flex-flow: row nowrap;
     align-items: center;
     align-content: center;
-    padding:10px 0px;
+    padding:10px 0;
 }
 section.ip4 > input[type="number"],
 section.ip4 > input[type="text"] {
     font-family: 'Patua One', cursive;
     font-size:2em;
     color:var(--purple);
-    padding:5px;
     border-radius:8px;
     border:none;
     text-align: center;
@@ -230,7 +229,7 @@ section.calculation .binary {
 
 section.description {
     grid-area:d;
-    padding: 30px 0px;
+    padding: 30px 0;
 }
 
 footer {
@@ -283,7 +282,7 @@ footer .github img {
         flex-grow: 1;
         align-items:center;
         align-content: center;
-        padding:10px 0px;
+        padding:10px 0;
     }
     section.ip4 > input[type="number"],
     section.ip4 > input[type="text"] {
