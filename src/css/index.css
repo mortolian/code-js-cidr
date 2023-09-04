@@ -22,17 +22,17 @@
 
 body {
     font-family: 'Nunito', sans-serif;
-    margin:0;
-    padding:0;
+    margin: 0;
+    padding: 0;
 }
 
 p {
-    font-size:1.1em;
+    font-size: 1.1em;
 }
 
 a {
     text-decoration: none;
-    color:var(--link);
+    color: var(--link);
 }
 
 input::-webkit-outer-spin-button,
@@ -42,17 +42,17 @@ input::-webkit-inner-spin-button {
 }
 
 input[type=number] {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield; /* Firefox */
 }
 
 /* LAYOUT GRID CONTAINER */
 body {
-    display:grid;
-    grid-template-columns: repeat(12,1fr);
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
     grid-template-rows:
-        repeat(4,minmax(min-content, max-content))
+        repeat(4, minmax(min-content, max-content))
         auto      
-        repeat(2, minmax(min-content,max-content));
+        repeat(2, minmax(min-content, max-content));
     grid-template-areas: 
         'h h h h h h h h h h h h'
         '. t t t t t t t t t t .'
@@ -61,7 +61,7 @@ body {
         '. c c c c c c c c c c .'
         '. d d d d d d d d d d .'
         'f f f f f f f f f f f f';
-    height:100vh;
+    height: 100vh;
 }
 
 header {
@@ -69,83 +69,94 @@ header {
     flex-direction: row;
     flex-wrap: nowrap;
     align-items: center;
-    padding:10px 30px;
-    grid-area:h;
-    background:var(--purple);
+    padding: 10px 30px;
+    grid-area: h;
+    background: var(--purple);
 }
+
 header > h1 {
-    margin:0;
-    padding:0;
-    font-size:1.2em;
+    margin: 0;
+    padding: 0;
+    font-size: 1.2em;
     font-weight: 100;
 }
+
 header > nav {
-    margin-left:auto;
-    font-size:0.7em;
+    margin-left: auto;
+    font-size: 0.7em;
 }
+
 header,
 header a,
 header a:hover {
-    color:#fff;
+    color: #fff;
     text-decoration: none;
-    font-size:1.2em;
+    font-size: 1.2em;
     font-family: 'Nunito', sans-serif;
-    font-weight:300;
+    font-weight: 300;
 }
 
 header > h1 > img.header-logo {
-    height:60px;
+    height: 60px;
 }
 
 section.title {
-    grid-area:t;
+    grid-area: t;
 }
+
 section.title > h1 {
     font-family: 'Patua One', cursive;
-    font-size:4em;
-    margin:0;
-    padding:40px 0 0 0;
-    color:var(--purple);
+    font-size: 4em;
+    margin: 0;
+    padding: 40px 0 0 0;
+    color: var(--purple);
 }
+
 section.title > h1 > span.green {
-    color:var(--green);
+    color: var(--green);
 }
 
 /* IPv4 */
 section.ip4 {
-    grid-area:i;
+    grid-area: i;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
     align-content: center;
-    padding:10px 0;
+    padding: 10px 0;
 }
+
 section.ip4 > input[type="number"],
 section.ip4 > input[type="text"] {
     font-family: 'Patua One', cursive;
-    font-size:2em;
-    color:var(--purple);
-    border-radius:8px;
-    border:none;
+    font-size: 2em;
+    color: var(--purple);
+    border-radius: 8px;
+    border: none;
     text-align: center;
-    padding:20px 10px;
+    padding: 20px 10px;
     outline: none;
 }
+
 section.ip4 > span {
     font-size: 1.5em;
-    color:#CCC;
-    padding:10px;
+    color: #CCC;
+    padding: 10px;
 }
+
 section.ip4 > span.bookmark {
     cursor: pointer;
 }
+
 section.ip4 > span.bookmark:hover {
     cursor: pointer;
     color: var(--green);
 }
+
 section.ip4 > span.print {
     cursor: pointer;
 }
+
 section.ip4 > span.print:hover {
     cursor: pointer;
     color: var(--green);
@@ -160,82 +171,95 @@ section.bookmarks {
     align-items: center;
     justify-content: flex-start;
 }
+
 section.bookmarks.hide {
-    visibility:hidden;
-    display:none;
+    visibility: hidden;
+    display: none;
 }
+
 section.bookmarks > *,
 section.bookmarks > ul > li {
-    padding:5px 10px;
-    margin:1px;
+    padding: 5px 10px;
+    margin: 1px;
     font-size: 1em;
 }
+
 section.bookmarks > h1 {
-    font-weight: 600;    
+    font-weight: 600;
 }
+
 section.bookmarks > ul > li {
-    background:#EAEAEA;
+    background: #EAEAEA;
     border-radius: 3px;
-    display:inline-block;
-    cursor: pointer;  
+    display: inline-block;
+    cursor: pointer;
     list-style: none;
 }
+
 section.bookmarks > ul > li:hover {
-    background:#cecece;
+    background: #cecece;
 }
+
 section.bookmarks > ul > li > i {
-    padding-left:10px;
-    color:#aeaeae;
+    padding-left: 10px;
+    color: #aeaeae;
 }
+
 section.bookmarks > ul > li > i:hover {
-    padding-left:10px;
-    color:red;
+    padding-left: 10px;
+    color: red;
 }
 
 /* CALCULATION RESULT GRID */
 section.calculation.hide {
-    visibility:hidden;
-    display:none;
+    visibility: hidden;
+    display: none;
 }
+
 section.calculation.display {
-    visibility:visible;
-    display:grid;
+    visibility: visible;
+    display: grid;
 }
+
 section.calculation {
-    grid-area:c;
-    grid-template-columns: repeat(3, minmax(min-content,max-content)) auto;
+    grid-area: c;
+    grid-template-columns: repeat(3, minmax(min-content, max-content)) auto;
     grid-template-rows: auto;
     gap: 1px;
-    margin-top:20px;
-    margin-bottom:40px;
+    margin-top: 20px;
+    margin-bottom: 40px;
 }
+
 section.calculation > div {
-    padding:8px;
-    background-color:#F4F4F4;
+    padding: 8px;
+    background-color: #F4F4F4;
 }
+
 section.calculation > div.heading {
     grid-column: 1 / -1;
-    font-size:1.2em;
-    font-weight:bold;
-    background-color:#EAEAEA;
-    border-bottom:4px solid #CCC;
+    font-size: 1.2em;
+    font-weight: bold;
+    background-color: #EAEAEA;
+    border-bottom: 4px solid #CCC;
 }
+
 section.calculation .copyip {
     cursor: pointer;
 }
+
 section.calculation .binary {
     word-break: break-all;
 }
 
 section.description {
-    grid-area:d;
+    grid-area: d;
     padding: 30px 0;
 }
 
 footer {
-    grid-area:f;
-    background:#EAEAEA;
-    padding:30px 30px;
+    grid-area: f;
+    background: #EAEAEA;
+    padding: 30px 30px;
     text-align: center;
     font-size: 12px;
 }
@@ -249,16 +273,16 @@ footer .github img {
 @media all and (max-width: 800px) {
     section.ip4 > input[type="number"],
     section.ip4 > input[type="text"] {
-        font-size:1.5em;
+        font-size: 1.5em;
     }
 }
 
 /* SMALL SCREENS */
 @media all and (max-width: 500px) {
     body {
-        font-size:0.8em;
+        font-size: 0.8em;
     }
-    
+
     header {
         flex-direction: column;
         align-items: center;
@@ -266,124 +290,145 @@ footer .github img {
     }
 
     section.title > h1 {
-        font-size:2em;
+        font-size: 2em;
     }
 
     header > nav {
         margin: 10px;
         padding: 5px;
     }
+
     header > nav > a {
-        padding:10px;
+        padding: 10px;
     }
 
     section.ip4 {
         flex-direction: row;
         flex-grow: 1;
-        align-items:center;
+        align-items: center;
         align-content: center;
-        padding:10px 0;
+        padding: 10px 0;
     }
+
     section.ip4 > input[type="number"],
     section.ip4 > input[type="text"] {
-        width:100%;
-        font-size:1.1em;
-        padding:10px 5px;
+        width: 100%;
+        font-size: 1.1em;
+        padding: 10px 5px;
     }
+
     section.ip4 > span.mobile-hide {
-        display:none;
+        display: none;
         visibility: hidden;
     }
+
     section.calculation {
-        grid-template-columns: minmax(min-content,max-content) auto minmax(min-content, max-content);
+        grid-template-columns: minmax(min-content, max-content) auto minmax(min-content, max-content);
     }
+
     section.calculation .mobile-hide {
-        display:none;
+        display: none;
         visibility: hidden;
     }
 }
 
 /* CALCULATION COLORS */
 section.calculation span.blue {
-    background:var(--oct1-light);
+    background: var(--oct1-light);
 }
+
 section.calculation span.red {
-    background:var(--oct2-light);
+    background: var(--oct2-light);
 }
+
 section.calculation span.yellow {
-    background:var(--oct3-light);
+    background: var(--oct3-light);
 }
+
 section.calculation span.green {
-    background:var(--oct4-light);
+    background: var(--oct4-light);
 }
+
 section.calculation span.grey {
-    background:#a5a5a5;
+    background: #a5a5a5;
 }
-section.calculation span.blue, 
-section.calculation span.red, 
+
+section.calculation span.blue,
+section.calculation span.red,
 section.calculation span.yellow,
 section.calculation span.green,
-section.calculation span.grey   {
-    padding:1px 10px;
-    margin:1px;
-    border-radius:3px;
+section.calculation span.grey {
+    padding: 1px 10px;
+    margin: 1px;
+    border-radius: 3px;
 }
+
 section.calculation #cidr-bin > span {
-    padding:1px 3px;
+    padding: 1px 3px;
 }
 
 
 /* OCTET 1 INPUT */
 input.octet-1 {
-    background-color:var(--oct1-light);
+    background-color: var(--oct1-light);
 }
+
 input.octet-1:focus {
-    background-color:var(--oct1-dark);
+    background-color: var(--oct1-dark);
 }
+
 input.octet-1::placeholder {
-    color:var(--oct1-pl);
+    color: var(--oct1-pl);
 }
 
 /* OCTET 2 INPUT */
 input.octet-2 {
-    background-color:var(--oct2-light);
+    background-color: var(--oct2-light);
 }
+
 input.octet-2:focus {
-    background-color:var(--oct2-dark);
+    background-color: var(--oct2-dark);
 }
+
 input.octet-2::placeholder {
-    color:var(--oct2-pl);
+    color: var(--oct2-pl);
 }
 
 /* OCTET 3 INPUT */
 input.octet-3 {
-    background-color:var(--oct3-light);
+    background-color: var(--oct3-light);
 }
+
 input.octet-3:focus {
-    background-color:var(--oct3-dark);
+    background-color: var(--oct3-dark);
 }
+
 input.octet-3::placeholder {
-    color:var(--oct3-pl);
+    color: var(--oct3-pl);
 }
 
 /* OCTET 4 INPUT */
 input.octet-4 {
-    background-color:var(--oct4-light);
+    background-color: var(--oct4-light);
 }
+
 input.octet-4:focus {
-    background-color:var(--oct4-dark);
+    background-color: var(--oct4-dark);
 }
+
 input.octet-4::placeholder {
-    color:var(--oct4-pl);
+    color: var(--oct4-pl);
 }
 
 /* CIDR INPUT */
 input.cidr {
-    background-color:#ccc;
+    background-color: #ccc;
 }
+
 input.cidr:focus {
-    background-color:#a5a5a5;
+    background-color: #a5a5a5;
 }
+
 input.cidr::placeholder {
-    color:#a5a5a5;
+    color: #a5a5a5;
 }
