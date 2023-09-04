@@ -1,6 +1,6 @@
 {
-    "name":"Gideon's Portfolio",
-    "short_name":"Gideon",
+    "name":"CIDR Calculator",
+    "short_name":"CIDR",
     "icons":[
         {"src":"/android-chrome-192x192.png","sizes":"192x192","type":"image/png"},
         {"src":"/android-chrome-512x512.png","sizes":"512x512","type":"image/png"}
