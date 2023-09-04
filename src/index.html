@@ -46,19 +46,29 @@
     </script>
 </head>
 <body>
-    <header>
-        <h1><img src="images/test53_logo.svg" class="header-logo" title="Test53 ipv4 CIDR Calculator | Crafted by Mortolian" alt="Test53 ipv4 CIDR Calculator | Crafted by Mortolian"></h1>
-        <nav>
-          <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" rel="nofollow" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp; Wikipedia</a>
-        </nav>
-    </header>
     <section id="title" class="title">
         <h1 class="animated bounceInRight">IPv4 <span class="green">CIDR Calculator</span></h1>
         <p>
             <b>CIDR (Classless Inter-Domain Routing) calculators</b> are simple tools to assist you to calculate a block of IP addresses. 
-            <a href="https://tools.ietf.org/html/rfc4632" rel="nofollow" target="_blank" title="Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan">RFC-4632</a>,
+            <a
+                    href="https://tools.ietf.org/html/rfc4632"
+                    rel="nofollow"
+                    target="_blank"
+                    title="Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan"
+            >
+                RFC-4632
+            </a>,
             &nbsp;
-            <a href="https://tools.ietf.org/html/rfc791" rel="nofollow" target="_blank" rel="noopener noreferrer" title="A document specifies the DoD Standard Internet Protocol. The Internet Protocol is designed for use in interconnected systems of packet-switched computer communication networks.">RFC-791</a>
+            <a
+                    href="https://tools.ietf.org/html/rfc791"
+                    rel="nofollow"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    title="A document specifies the DoD Standard Internet Protocol. The Internet Protocol is designed
+                    for use in interconnected systems of packet-switched computer communication networks."
+            >
+                RFC-791
+            </a>
             .
         </p>
     </section>
@@ -141,24 +151,30 @@
         <div class="copyip">-</div>
         <div class="binary mobile-hide">-</div>
     </section>
-
-    <section id="description" class="description myPagesClass">
-        <hr>
-        <h2>What is CIDR notation according to Wikipedia</h2>
-        <p>
-            CIDR notation is a compact representation of an IP address and its associated routing prefix. The notation is constructed from an IP address, a slash ('/') character, and a decimal number. The number is the count of leading 1 bits in the subnet mask. Larger values here indicate smaller networks. The maximum size of the network is given by the number of addresses that are possible with the remaining, least-significant bits below the prefix.
-        </p>
-        <p>
-            The IP address is expressed according to the standards of IPv4 or IPv6. The address may denote a single, distinct interface address or the beginning address of an entire network. The aggregation of these bits is often called the host identifier.
-        </p>
-        <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" rel="nofollow" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp;Read more on Wikipedia</a>
-    </section>
-
     <footer>
-        <p>IPv4 CIDR Calculator | Copyright &copy; <span id="copyrightyear"></span> - <a href="https://gideon.dev/build" rel="nofollow" title="Mortolian" target="_blank">Mortolian</a></p>
+        <footer>
+            <div>
+                <p>CIDR notation is a compact representation of an IP address and its associated routing prefix.
+                    The notation is constructed from an IP address, a slash ('/') character, and a decimal number.
+                    The number is the count of leading 1 bits in the subnet mask. Larger values here indicate smaller
+                    networks. The maximum size of the network is given by the number of addresses that are possible
+                    with the remaining, least-significant bits below the prefix.
+                </p>
+                <p>The IP address is expressed according to the standards of IPv4 or IPv6. The address may denote a
+                    single, distinct interface address or the beginning address of an entire network. The aggregation
+                    of these bits is often called the host identifier.
+                </p>
+                <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing">Read More On Wikipedia</a>
+            </div>
+            <div class="github">
+                <a href="https://github.com/mortolian/code-js-cidr" target="_blank">
+                    <img src="images/github.png" alt="Code Available on GitHub." title="Source available on GitHub.">
+                </a>
+            </div>
+            <div>Copyright &copy; 2023 Mortolian</div>
+        </footer>
     </footer>
 </body>
-
 <script src="js/cidr.calculator.js"></script>
 <script src="js/index.js"></script>
 </html>

@@ -22,8 +22,8 @@
 
 body {
     font-family: 'Nunito', sans-serif;
-    margin:0px;
-    padding:0px;
+    margin:0;
+    padding:0;
 }
 
 p {
@@ -238,6 +238,12 @@ footer {
     background:#EAEAEA;
     padding:30px 30px;
     text-align: center;
+    font-size: 12px;
+}
+
+footer .github img {
+    width: 50px;
+    padding: 20px 0;
 }
 
 /* MEDIUM SCREENS */
