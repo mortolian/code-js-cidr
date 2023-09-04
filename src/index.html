@@ -1,0 +1,164 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link href="https://fonts.googleapis.com/css?family=Patua+One&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Nunito:300,400,700&display=swap" rel="stylesheet">
+    <link href="vendor/fontawesome-5-11-2/css/all.css" rel="stylesheet">
+    <link href="css/index.css" rel="stylesheet" media="screen">
+    <link rel="stylesheet" href="vendor/animate-js/animate.css" media="screen">
+    <link rel="stylesheet" href="vendor/balloon/balloon.min.css" media="screen">
+    <link href="css/index.css" rel="stylesheet" media="print">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+
+    <title>IPv4 CIDR Calculator - Classless Inter-Domain Routing</title>
+
+    <!--SEO META-->
+    <meta name="description" content="IPv4 CIDR (Classless Inter-Domain Routing) calculators are simple tools to assist
+    you to calculate a block of IP addresses.">
+    <meta name="author" content="Gideon,Mortolian">
+    <meta rel="canonical" content="/">
+
+    <!--OPEN GRAPH - RDFa Core 1.1 CURIE prefix-->
+    <meta property="og:title" content="IPv4 CIDR Calculator by Mortolian">
+    <meta property="description" content="IPv4 CIDR (Classless Inter-Domain Routing) calculators are simple tools to
+    assist you to calculate a block of IP addresses.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="/">
+    <meta property="og:image" content="/images/cidr.jpg">
+
+    <!--TWITTER CARD-->
+    <meta name="twitter:card" content="summary"></meta>
+    
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-8W5Q69CK14"></script>
+    <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'G-8W5Q69CK14');
+    </script>
+</head>
+<body>
+    <header>
+        <h1><img src="images/test53_logo.svg" class="header-logo" title="Test53 ipv4 CIDR Calculator | Crafted by Mortolian" alt="Test53 ipv4 CIDR Calculator | Crafted by Mortolian"></h1>
+        <nav>
+          <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" rel="nofollow" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp; Wikipedia</a>
+        </nav>
+    </header>
+    <section id="title" class="title">
+        <h1 class="animated bounceInRight">IPv4 <span class="green">CIDR Calculator</span></h1>
+        <p>
+            <b>CIDR (Classless Inter-Domain Routing) calculators</b> are simple tools to assist you to calculate a block of IP addresses. 
+            <a href="https://tools.ietf.org/html/rfc4632" rel="nofollow" target="_blank" title="Classless Inter-domain Routing (CIDR): The Internet Address Assignment and Aggregation Plan">RFC-4632</a>,
+            &nbsp;
+            <a href="https://tools.ietf.org/html/rfc791" rel="nofollow" target="_blank" rel="noopener noreferrer" title="A document specifies the DoD Standard Internet Protocol. The Internet Protocol is designed for use in interconnected systems of packet-switched computer communication networks.">RFC-791</a>
+            .
+        </p>
+    </section>
+    <section id="ip4" class="ip4">
+        <input class="octet octet-1" tabindex="1" type="text" name="ip4-octet-1" min="1" max="255" size="4" maxlength="3" placeholder="192" title="IP4 octet one input box" />
+        <span class="mobile-hide">&bull;</span>
+        <input class="octet octet-2" tabindex="2" type="text" name="ip4-octet-2" min="1" max="255" size="4" maxlength="3" placeholder="168" title="IP4 octet two input box" />
+        <span class="mobile-hide">&bull;</span>
+        <input class="octet octet-3" tabindex="3" type="text" name="ip4-octet-3" min="1" max="255" size="4" maxlength="3" placeholder="1" title="IP4 octet three input box" />
+        <span class="mobile-hide">&bull;</span>
+        <input class="octet octet-4" tabindex="4" type="text" name="ip4-octet-4" min="1" max="255" size="4" maxlength="3" placeholder="10" title="IP4 octet four input box" />
+        <span class="mobile-hide">/</span>
+        <input class="cidr" tabindex="5" type="text" name="ip4-cidr" step="1" min="1" max="32" size="2" maxlength="2" placeholder="24" title="IP4 CIDR input box" />
+        <span id="bookmark" class="bookmark" data-balloon-pos="up" aria-label="Button to bookmark this IP"><i class="fas fa-bookmark"></i></span>
+        <span id="print" class="print mobile-hide" data-balloon-pos="up" aria-label="Button to print the CIDR information"><i class="fas fa-print"></i></span>
+    </section>
+
+    <section id="bookmarks" class="bookmarks hide">
+        <h1>Bookmarked&nbsp;&nbsp;<i class="fas fa-question-circle" data-balloon-pos="up" data-balloon-length="medium" aria-label="You can bookmark the IPS you have entered and click on them to quickly recall their calculation."></i></h1>
+        <ul id="bookmarked_ips" class="bookmarked_ips"></ul>
+    </section>
+
+    <section id="calculation" class="calculation hide">
+        <div class="heading span4">IP Range Information</div>
+
+        <div class="name">IP</div>
+        <div class="value" id="ip-value"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide">-</div>
+
+        <div class="name">CIDR / Bitmask</div>
+        <div class="value" id="cidr-value"></div>
+        <div class="copyip">-</div>
+        <div class="binary mobile-hide" id="cidr-bin"></div>
+
+        <div class="name">Network IP</div>
+        <div class="value" id="networkip-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="networkip-bin"></div>
+
+        <div class="name">Broadcast IP</div>
+        <div class="value" id="broadcastip-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="broadcastip-bin"></div>
+
+        <div class="name">First Host IP</div>
+        <div class="value" id="first-host-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="first-host-bin"></div>
+
+        <div class="name">Last Host IP</div>
+        <div class="value" id="last-host-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="last-host-bin"></div>
+
+        <div class="name">IP Class (<a href="https://en.wikipedia.org/wiki/Classful_network" rel="nofollow" target="_blank" rel="noopener noreferrer" title="A classful network is a network addressing architecture used in the Internet from 1981 until the introduction of Classless Inter-Domain Routing in 1993.">Info</a>)</div>
+        <div class="value" id="class-ip4"></div>
+        <div class="copyip">-</div>
+        <div class="binary mobile-hide">-</div>
+
+        <div class="heading span4">Subnet Information</div>
+
+        <div class="name">Netmask</div>
+        <div class="value" id="subnet-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="subnet-bin"></div>
+
+        <div class="name">Netmask Wildcard</div>
+        <div class="value" id="subnet-wildcard-ip4"></div>
+        <div class="copyip" onClick="copyToClipboard(this.previousElementSibling)"><i class="fas fa-clipboard"></i></div>
+        <div class="binary mobile-hide" id="subnet-wildcard-bin"></div>
+
+        <div class="name">Number Of Host IPs</div>
+        <div class="value" id="host-ips-ip4"></div>
+        <div class="copyip">-</div>
+        <div class="binary mobile-hide">-</div>
+
+        <div class="name">Total Number Of IPs</div>
+        <div class="value" id="total-ips-ip4"></div>
+        <div class="copyip">-</div>
+        <div class="binary mobile-hide">-</div>
+    </section>
+
+    <section id="description" class="description myPagesClass">
+        <hr>
+        <h2>What is CIDR notation according to Wikipedia</h2>
+        <p>
+            CIDR notation is a compact representation of an IP address and its associated routing prefix. The notation is constructed from an IP address, a slash ('/') character, and a decimal number. The number is the count of leading 1 bits in the subnet mask. Larger values here indicate smaller networks. The maximum size of the network is given by the number of addresses that are possible with the remaining, least-significant bits below the prefix.
+        </p>
+        <p>
+            The IP address is expressed according to the standards of IPv4 or IPv6. The address may denote a single, distinct interface address or the beginning address of an entire network. The aggregation of these bits is often called the host identifier.
+        </p>
+        <a href="https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing" rel="nofollow" target="_blank" title="A link to Classless Inter-Domain Routing on Wikipedia"><i class="fab fa-wikipedia-w"></i>&nbsp;&nbsp;Read more on Wikipedia</a>
+    </section>
+
+    <footer>
+        <p>IPv4 CIDR Calculator | Copyright &copy; <span id="copyrightyear"></span> - <a href="https://gideon.dev/build" rel="nofollow" title="Mortolian" target="_blank">Mortolian</a></p>
+    </footer>
+</body>
+
+<script src="js/cidr.calculator.js"></script>
+<script src="js/index.js"></script>
+</html>
