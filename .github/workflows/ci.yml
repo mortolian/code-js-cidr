@@ -1,4 +1,4 @@
-name: CI Tests and Deploy To Github Pages
+name: CI Tests
 on:
   push:
     branches: [ main, master ]
