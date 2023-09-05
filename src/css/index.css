@@ -243,7 +243,8 @@ section.calculation > div.heading {
     border-bottom: 4px solid #CCC;
 }
 
-section.calculation .copyip {
+
+section.calculation .copyIp {
     cursor: pointer;
 }
 
